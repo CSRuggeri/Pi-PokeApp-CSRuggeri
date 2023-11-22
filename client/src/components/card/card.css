@@ -1,0 +1,45 @@
+.card-container{
+    display: flex;
+    background-color: rgba(190, 216, 216, 0);
+    margin: 20px;
+    border: 2px solid #000000;
+    border-radius: 10px;
+   
+    position: relative;
+    height: 15rem;
+    width: 15rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-container:hover{   
+    background-color: rgba(198, 0, 0, 0.599);
+    border-radius: 200px;
+}
+
+.imgcard{   
+    margin-left: 20px;   
+    width: 60%;
+    max-height: 100px;
+}
+a {
+    text-decoration: none;
+}
+
+.info{
+    display: flex;
+    flex-direction: column;
+    color: rgba(0, 0, 0, 0.627);
+    
+    align-items: center;
+}
+
+.card-container:hover .imgcard {
+    filter: grayscale(0) blur(0px);
+    opacity: 1;
+  }
+
+
+  .card-container:hover .info{
+    color: rgb(23, 25, 13);
+  }

@@ -1,0 +1,33 @@
+.cards-container {
+  background-color: rgb(249 255 249 / 75%); 
+    /* Light grey background */
+   
+      border-radius: 6px; /* Add rounded corners */
+      border-color: #2b050a;
+      border:solid 2px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  }
+  
+  /* Additional styling for headings, paragraphs, etc. inside the card */
+  .cards-container h2 {
+    color: #555; /* Slightly darker grey for headings */
+  }
+  
+  .cards-container p {
+    line-height: 1.5; /* Adjust line height for readability */
+  }
+
+
+.pokecards{
+  display: flex;  
+    grid-gap: 1rem;
+    grid-gap: 1rem;
+    gap: 1rem;
+    margin: 60px;   
+    height: 60rem;   
+    justify-content: center;
+    flex-direction: column;
+    align-content: center;
+    flex-wrap: wrap;
+}
+    

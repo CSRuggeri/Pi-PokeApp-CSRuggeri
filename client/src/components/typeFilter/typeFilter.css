@@ -1,0 +1,41 @@
+.type-container{
+    display: flex;
+    /* grid-template-columns: repeat(2, 1fr); */
+    /* grid-template-rows: repeat(10, 1fr); */
+    /* grid-column-gap: 5px; */
+    /* grid-row-gap: 5px; */
+    margin: 10px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+
+.button-type{
+    display: inline-block;
+    padding: 10px 15px;
+    font-size: 10px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: 2px solid #000000;
+    color: #000000;
+    background-color: #fff; /* Background color */
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s, color 0.3s; /* Transition effect */
+}
+
+
+.button-type:hover{
+    cursor: pointer;
+    color: rgb(255, 255, 255);
+     
+    box-shadow: 3px 3px 1px rgb(164, 97, 30);
+}
+
+.filtersxd{
+    font-size: large;
+    margin-left: 1rem;
+    text-align: center;
+}

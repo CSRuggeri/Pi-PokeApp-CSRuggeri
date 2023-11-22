@@ -1,0 +1,35 @@
+.about{
+    display: flex;
+    background-image: url("../../assets/about.jpg");
+    height: 638px;
+    width: 957px;
+    margin-top: 6rem;
+    margin-left: 27rem;
+    position: relative;
+}
+
+.aboutname{
+    position: absolute;
+    scale: 2.5;
+    margin-top: 9rem;
+    margin-left: 16rem;
+}
+
+.aboutboton{
+    position: absolute;
+}
+.aboutgit{
+    position: absolute;
+    scale: 2;
+    margin-top: 15.7rem;
+    margin-left: 12rem;
+}
+
+.aboutlink{
+    position: absolute;
+    display: flex;
+    scale: 2;
+    margin-left: 13rem;
+    margin-top: 19.7rem;
+    align-items: center;
+}

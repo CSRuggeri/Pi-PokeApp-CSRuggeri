@@ -1,0 +1,72 @@
+
+.form-container{
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    background-color: transparent;
+    background-image: url(https://cutewallpaper.org/23/pokemon-pattern-wallpaper/302319972.jpg);
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    
+}
+label{
+    width: 20%;
+}
+.inputs{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: baseline;
+    justify-content: center;
+     padding: 10px;
+     width: 100%;
+}
+.input-create {
+   
+    border-radius: 5px;
+    padding: 10px 20px;
+    
+    width: 60%;
+}
+
+.form-create {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    padding: 20px;
+    font-weight: 600;
+    background-color: rgb(249 255 249 / 75%); 
+    border-radius: 10px; /* Add rounded corners */
+      border-color: #2b050a;
+      border:solid 2px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+    align-items: center;
+}
+
+.bienvenido{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.check {
+    display: flex;
+    flex-wrap: wrap;
+    grid-gap: 5px;
+    gap: 5px;
+    justify-content: space-evenly;
+}
+
+button{
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: 2px solid #000000;
+    color: #000000;
+    background-color: #fff; /* Background color */
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}

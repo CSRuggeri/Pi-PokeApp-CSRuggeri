@@ -1,0 +1,34 @@
+.paginado {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .paginado button {
+    background-color: #fff;
+    color: #000000;
+    border: 2px solid #000000;
+    padding: 10px 10px;
+    font-size: 12px;
+    margin: 0 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .paginado button:hover {
+    box-shadow: 3px 3px 1px rgb(157, 38, 38);
+  }
+  
+  .paginado button:disabled {
+    background-color: #bdc3c7;
+    cursor: not-allowed;
+  }
+  
+  /* Style for the Previous and Next buttons */
+  .paginado button:first-child,
+  .paginado button:last-child {
+    margin: 0;
+  }
+  

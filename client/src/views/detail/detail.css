@@ -1,0 +1,94 @@
+body{
+    background-image: url(https://cutewallpaper.org/23/pokemon-pattern-wallpaper/302319972.jpg);
+    background-size: auto;
+}
+.detailContainer{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+.todo{
+    display: flex;
+    background-image: url('../../assets/sasdasddeta.png');
+    height: 576px;
+    width: 824px;
+    
+    margin-top:100px;
+    position: relative;
+    margin-bottom: 0;
+}
+
+.todoimage{
+    scale: 4;
+    margin-left: 550px;
+    margin-top: 200px;
+    position: absolute;
+    
+    max-width: 100px;
+    max-height: 100px;
+}
+.todoname{
+    scale: 1;
+    position: absolute;
+    margin-left: 70px;
+    margin-top: 100px;
+}
+
+.tododetails{
+    margin-left: 120px;
+    scale: 1.5;
+    position: absolute;
+    margin-top: 300px;
+}
+
+.todotype{
+    position: absolute;
+    margin-left: 270px;
+    margin-top: 90px;
+}
+.todoboton{
+    position:absolute;
+    height: 100px;
+    background-color: transparent;
+    width: 300px;
+    border: 1px 1px 1pc transparent;
+    border-style: thin;
+    filter: grayscale(50%);
+    background-image: url("../../assets/botonbacj.png");
+}
+
+
+.errorid{
+    position: relative;
+}
+
+.errorida{
+    position: absolute;
+    scale: 3;
+    margin-top: 25rem;
+    margin-left: 50rem;
+}
+
+.todoboton2{
+    filter: grayscale(50%);
+    margin-top: 13rem;
+    margin-left: 50rem;
+    position:absolute;
+    height: 100px;
+    background-color: transparent;
+    width: 300px;
+    border: 1px 1px 1pc transparent;
+    border-style: thin;
+    background-image: url("../../assets/botonbacj.png");
+}
+.todoboton2:hover{
+    filter: grayscale(0%);
+}
+
+.todoboton:hover{
+    filter: grayscale(0%);
+}
+
+p{
+    font-size: 14px;
+}

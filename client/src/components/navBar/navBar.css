@@ -1,0 +1,111 @@
+
+
+.nav-bars{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    color: #fff;
+    flex-direction: column-reverse;
+    width: 100%;
+}
+
+.buttonss:hover{
+    background-color: cyan;
+}
+
+.Home-wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: url(https://cutewallpaper.org/23/pokemon-pattern-wallpaper/302319972.jpg) ;
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: 2px solid #000000;
+    color: #000000;
+    background-color: #fff; /* Background color */
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.button:hover {
+    cursor: pointer;
+    color: white;
+     
+    box-shadow: 3px 3px 1px rgb(54, 157, 38);
+}
+
+.input-search {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    border: 2px solid #000000;
+    color: #000000;
+    background-color: #fff; /* Background color */
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    width: 100%;
+}
+
+.button-container {
+    margin-top: 10px;
+}
+.types{
+    margin-top: 3rem;
+    margin: 3px;
+}
+
+ form.searchabrnashe{
+    display: flex;
+    
+    width: 40%;
+    
+}
+
+.buttonss{
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: 2px solid #000000;
+    color: #000000;
+    background-color: #fff; /* Background color */
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.buttonss:hover{
+    
+    cursor: pointer;
+    color: white;
+     
+    box-shadow: 3px 3px 1px rgb(38, 38, 157);
+}   
+
+.top-part{
+    display: flex;
+    align-items: baseline;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 20px;
+}
+.nashe{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    flex-direction: row;
+}
