@@ -109,3 +109,8 @@
     justify-content: center;
     flex-direction: row;
 }
+.logo{
+   height: 15%;
+   width: 15%;
+   
+}

@@ -12,7 +12,7 @@ function Navbar({ handleChange, handleSubmit, setPage, handleClear }) {
 
   return (
     <div className="nav-bars">
-      
+      <img  className="logo" src="https://raw.githubusercontent.com/CSRuggeri/Pi-PokeApp-CSRuggeri/main/pokemon.png" alt="logo" /> 
      <div   className="nashe">
           <form onSubmit={handleFormSubmit} className="searchabrnashe">
         <input
@@ -27,6 +27,7 @@ function Navbar({ handleChange, handleSubmit, setPage, handleClear }) {
       </form>
         </div> 
       
+     
       
       <div className="top-part">
 

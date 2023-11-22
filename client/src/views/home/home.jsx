@@ -85,7 +85,7 @@ const HomePage = () => {
     <section className="Home-wrapper">
       <div className="headerxd">
       <Navbar handleChange={handleChange} handleSubmit={handleSubmit} setPage={setPage} handleClear={handleClear}/>
-     <Pagination className="paginadohome" page={page} total={totalPages} handlePage={handlePage} />
+     
 
       </div>
       
@@ -97,6 +97,7 @@ const HomePage = () => {
         <Cards allPokemons={allPokemons} setPage={setPage} />        
       </section>
       <footer>
+        <Pagination className="paginadohome" page={page} total={totalPages} handlePage={handlePage} />
     <p className="description">&copy; 2023 Todos los derechos reservados</p>
   </footer>
       
