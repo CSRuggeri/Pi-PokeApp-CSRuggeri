@@ -1,14 +1,16 @@
-const { Pokemon, Type } = require("../db");
+const { Pokemon, Type, } = require("../db");
+
+const {Op} = require('sequelize');
 const axios = require("axios");
 
 const getPokemonByName = async (name) => {
   try {
-    if (name !== undefined) {
-      // Buscar en la base de datos todos los Pokémon cuyo nombre contenga la cadena proporcionada
-      const dbPokemonByName = await Pokemon.findAll({
+    if (name) {
+      // Make sure the stored name is in lowercase for comparison
+      const dbPokemonByName = await Pokemon.findAll(name, {
         where: {
           name: {
-            [Op.iLike]: `%${name}%`, // Usar Op.iLike para búsqueda no estricta (case-insensitive)
+            [Op.iLike]: `%${name.toLowerCase()}%`,
           },
         },
         include: [
@@ -22,25 +24,52 @@ const getPokemonByName = async (name) => {
         ],
       });
 
-      // Si se encuentran registros en la base de datos, retornarlos
-      if (dbPokemonByName && dbPokemonByName.length > 0) {
-        return dbPokemonByName;
+      // If records are found in the database, format the response
+      if (dbPokemonByName.length > 0) {
+        const formattedDbResults = dbPokemonByName.map(pokemon => ({
+          id: pokemon.id,
+          name: pokemon.name,
+          img: pokemon.dataValues.sprites.versions['generation-v']['black-white'].animated['front_default'],
+          types: pokemon.types.map(t => ({
+            name: t.name,
+          })),
+          health: pokemon.stats.find(s => s.stat.name === 'hp').base_stat,
+          attack: pokemon.stats.find(s => s.stat.name === 'attack').base_stat,
+          defense: pokemon.stats.find(s => s.stat.name === 'defense').base_stat,
+          speed: pokemon.stats.find(s => s.stat.name === 'speed').base_stat,
+          height: pokemon.height,
+          weight: pokemon.weight,
+        }));
+
+        return formattedDbResults;
       }
     }
 
-    // Si no se encuentra un registro en la base de datos o no se proporciona un nombre, consultar la API
-    const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`);
+    // If no records are found in the database or no name is provided, query the API
+    const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name.toLowerCase()}`);
 
     const apiPokemonByName = {
       id: response.data.id,
       name: response.data.name,
-      // Resto de los atributos aquí
+      img: response.data.sprites.versions['generation-v']['black-white'].animated['front_default'],
+      types: response.data.types.map(t => {
+        return { name: t.type.name };
+      }),
+      health: response.data.stats.find(s => s.stat.name === 'hp').base_stat,
+      attack: response.data.stats.find(s => s.stat.name === 'attack').base_stat,
+      defense: response.data.stats.find(s => s.stat.name === 'defense').base_stat,
+      speed: response.data.stats.find(s => s.stat.name === 'speed').base_stat,
+      height: response.data.height,
+      weight: response.data.weight
     };
 
-    return [apiPokemonByName]; // Devolver un array de resultados, ya que la búsqueda puede devolver varios Pokémon
+    return [apiPokemonByName];
   } catch (error) {
     throw error;
-  }};
+  }
+};
+
+
 
   // Agregar esta función para obtener los primeros 151 Pokémon
  

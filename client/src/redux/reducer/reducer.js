@@ -14,7 +14,7 @@ import {
   CREATE_POKEMON,
  SET_PAGE
 } from "../actions/actions";
-
+const PER_PAGE = 12; // Define PER_PAGE here
 let initialState = {
   allPokemons: [],
   pokemonCopy: [],
@@ -22,30 +22,33 @@ let initialState = {
   details: {},
   types: [],
   filter: "all",
+  filteredPokemons:[],
   pokemonOrder:[],
   originFilter: "all",
   newPokemon:[],
   currentPage: 1,
+  totalPages: 1, // Add totalPages to the initial state
 };
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
     case SET_PAGE:
-      return {
-        ...state,
-        currentPage: action.payload,
-      };
+  return {
+    ...state,
+    currentPage: action.payload,
+  };
     
    
-    case GET_POKEMONS:
-      return {
-        ...state,
-        allPokemons: [...state.allPokemons, ...action.payload],
-        
-        pokemonCopy: action.payload,
-        pokemonOrder: action.payload,
-        newPokemon:action.payload
-      };
+      case GET_POKEMONS:
+        return {
+          ...state,
+          allPokemons: [...action.payload.pokemons],
+          pokemonCopy: [...action.payload.pokemons],
+          pokemonOrder: [...action.payload.pokemons],
+          newPokemon: [...action.payload.pokemons],
+          currentPage: action.payload.currentPage,
+          totalPages: action.payload.totalPages,
+        };
       case CREATE_POKEMON:
         // Handle the new action type
         return {
@@ -70,25 +73,30 @@ function rootReducer(state = initialState, action) {
       return { ...state, details: {} };
 
     case GET_TYPES:
-      return { ...state, types: action.payload.slice(0, 20) };  
+      return { ...state, types:[ ...action.payload].slice(0, 20) };  
 
-    case TYPE_FILTER:
-      if (action.payload === "all") {
-        return {
-          ...state,
-          allPokemons: state.pokemonCopy,
-          filter: action.payload,
-        };
-      } else {
-        return {
-          ...state,
-          filter: action.payload,
-          allPokemons: state.pokemonCopy.filter((p) => {
-            return p.types.filter((t) => t.name === action.payload).length;
-          }),
-        };
-      }
+      case TYPE_FILTER:
+  if (action.payload === "all") {
+    return {
+      ...state,
+      allPokemons: [...state.pokemonCopy],
+      filter: action.payload,
+      currentPage: 1,
+      totalPages: Math.ceil([...state.pokemonCopy].length / PER_PAGE),
+    };
+  } else {
+    const filteredPokemons = [...state.pokemonCopy].filter((p) => {
+      return p.types.filter((t) => t.name === action.payload).length;
+    });
 
+    return {
+      ...state,
+      filter: action.payload,
+      allPokemons:[...filteredPokemons],
+      
+     
+    };
+  }
       case FILTER_POKEMON:
   let sortedPokemonCopy;
 
@@ -116,21 +124,22 @@ function rootReducer(state = initialState, action) {
         (a, b) => a.attack - b.attack
       );
       break;
-
-    default:
-      sortedPokemonCopy = [...state.allPokemons];
-  }
-
-  return {
-    ...state,
-    allPokemons: sortedPokemonCopy,
-  };
+      default:
+        sortedPokemonCopy = [...state.pokemonCopy];
+    }
+    return {
+      ...state,
+      allPokemons:[ ...sortedPokemonCopy],
+     
+    };
 
     case CLEAR_SEARCH:
-      return {
-        ...state,
-        allPokemons: state.pokemonOrder
-      };
+  return {
+    ...state,
+    allPokemons: state.pokemonOrder,
+    currentPage: 1, // Reset currentPage when clearing search
+    totalPages: Math.ceil(state.pokemonOrder.length / PER_PAGE),
+  };
 
     case FILTER_BY_ORIGIN:
       const selectedOrigin = action.payload;

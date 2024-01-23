@@ -5,6 +5,7 @@ const {getPokemonDb, getAllPokemon} = require("../controllers/getAllPokemons");
 const { getPokemonById } = require("../controllers/getPokemonById");
 const {createPokemon} =require ("../controllers/createPokemon")
 const {getPokemonByName, getFirst151Pokemons,}= require("../controllers/getPokemonByName")
+const {Op} = require('sequelize');
 /////////////////////////////////////getAll****************************************************
 //**********************************///////////////////////////////////////////////////////////
 const getPokemonHandler = async(req,res)=> {
@@ -50,7 +51,7 @@ const createPokemonHandler= async(req, res)=> {
 
 }
 catch(error){
-    res.status(400).json( {error : error.message} )
+    res.status(400).json(alert( {error : "error al crear pokemon chekea los valores"} ))
 }}
 /////////////////////////////////////ById******************************************************
 //**********************************///////////////////////////////////////////////////////////
@@ -70,19 +71,20 @@ const getPokemonByIdHandler = async (req, res) => {
 
   /////////////////////////////////////ByName**************************************************
 //**********************************///////////////////////////////////////////////////////////
-  const getPokemonByNameHandler = async (req, res) => {
-    const { name } = req.params;
-    try {
-      if (!name) {
-        return res.status(400).json({ error: "Nombre de Pokémon no proporcionado" });
-      }
-  
-      const pokemonList = await getPokemonByName(name);
-      res.status(200).json(pokemonList);
-    } catch (error) {
-      res.status(400).json({ error: error.message });
+const getPokemonByNameHandler = async (req, res) => {
+  const { name } = req.params; // Cambia de req.query a req.params
+  try {
+    if (!name) {
+      return res.status(400).json({ error: "Nombre de Pokémon no proporcionado" });
     }
-  };
+
+    const pokemonList = await getPokemonByName(name);
+    res.status(200).json(pokemonList);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
   /////////////////////////////////////first151**************************************************
 //**********************************///////////////////////////////////////////////////////////
 const getFirst151 = async (req, res) => {

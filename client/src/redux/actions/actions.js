@@ -15,10 +15,10 @@ export const SET_PAGE = "SET_PAGE";
 
 export function createPokemon(pokemonData) {
   return async function (dispatch) {
-    try {
-      console.log("Request Payload:", pokemonData);
+try {
+      
       const response = await axios.post("http://localhost:3001/pokemon/new", pokemonData);
-     
+         console.log("Request Payload:", pokemonData);
       
       dispatch({
         type: CREATE_POKEMON,
@@ -45,15 +45,25 @@ export const setPage = (pageNumber) => async (dispatch) => {
 
 
 
-
 export function getPokemons(page) {
-  return async function (dispatch) {
+  return async function (dispatch, getState) {
     try {
-      const response = await axios(`http://localhost:3001/pokemon?page=${page}`);
-     
+      const state = getState(); // Get the current state
+
+      // You can access the filters and sorts from the state
+      const { filter, originFilter } = state;
+
+      // Customize your API call based on the filters and sorts
+      const apiUrl = `http://localhost:3001/pokemon?page=${page}&filter=${filter}&originFilter=${originFilter}`;
+      const response = await axios(apiUrl);
+
       dispatch({
         type: GET_POKEMONS,
-        payload: response.data,
+        payload: {
+          pokemons: response.data,
+          currentPage: page,
+          totalPages: response.headers['x-total-pages'],
+        },
       });
     } catch (error) {
       console.error("Error fetching Pokémon data:", error);
@@ -65,9 +75,16 @@ export function getPokemons(page) {
 export function getByname(name) {
   return async function (dispatch) {
     try {
-      const response = await axios(`http://localhost:3001/pokemon/${name}`);
-      
-      if (response.data.length === 0) {
+     
+      const allPokemonResponse = await axios('http://localhost:3001/pokemon');
+      const allPokemonData = allPokemonResponse.data;
+
+    
+      const filteredData = allPokemonData.filter(pokemon =>
+        pokemon.name.toLowerCase().includes(name.toLowerCase())
+      );
+
+      if (filteredData.length === 0) {
         dispatch({
           type: "POKEMON_NOT_FOUND",
           payload: [],
@@ -75,30 +92,44 @@ export function getByname(name) {
       } else {
         dispatch({
           type: GET_BY_NAME,
-          payload: response.data,
+          payload: filteredData,
         });
       }
     } catch (error) {
-      alert("no existe pokemon con ese nombre", error.message);
+      alert("Error al buscar Pokémon", error.message);
       throw error;
     }
   };
 }
 
-
-export function getDetails(id, setIsIdValid) {
+export function getDetails(id, setIsIdValid, filter) {
   return async function (dispatch) {
     try {
       const response = await axios(`http://localhost:3001/pokemon/${id}`);
+      const filteredData = applyFilter(response.data, filter);
+
       dispatch({
         type: "GET_DETAILS",
-        payload: response.data,
+        payload: filteredData,
       });
-      setIsIdValid(true); // La ID es válida, actualizar el estado
+
+      setIsIdValid(true);
     } catch (error) {
-      setIsIdValid(false); // La ID no es válida, actualizar el estado
+      setIsIdValid(false);
     }
   };
+}
+
+// Helper function to apply the filter
+function applyFilter(data, filter) {
+  // Apply your filtering logic here based on the filter parameter
+  // Example: Filter by type
+  if (filter === "fire") {
+    return data.filter((pokemon) => pokemon.types.includes("fire"));
+  }
+  
+  // If no filter or other filters, return the original data
+  return data;
 }
 
 

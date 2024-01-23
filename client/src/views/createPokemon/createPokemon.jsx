@@ -48,7 +48,7 @@ function CreatePoke() {
   };
 
   useEffect(() => {
-    console.log(errors);
+    
   }, [errors]);
 
   const handleChangeTypes = (e) => {
@@ -88,7 +88,7 @@ function CreatePoke() {
       const response = await dispatch(createPokemon(input));
   
       if (response && response.error) {
-        console.error('Error creating Pokémon:', response.error);
+        alert('Error creating Pokémon:', response.error);
         // Handle error as needed
         setSuccessMessage("");
       } else {
@@ -110,11 +110,11 @@ function CreatePoke() {
   
 
   useEffect(() => {
-    console.log(input);
+    
   }, [input]);
 
   useEffect(() => {
-    console.log(successMessage);
+    
   }, [successMessage]);
 
   return (
@@ -124,10 +124,10 @@ function CreatePoke() {
       <form onSubmit={handleSubmit} className="form-create">
         <h1 className="bienvenido">Crea tu propio Pokemon!</h1>
         <div className="inputs">
-          <label> Name</label>
-          <input onChange={handleChange} value={input.name} name="name" className="input-create" />
-          {errors.name ? <label>{errors.name}</label> : <label>&nbsp;</label>}
-        </div>
+  <label>Name</label>
+  <input onChange={handleChange} value={input.name} name="name" className="input-create" />
+  {errors.name ? <label>{errors.name}</label> : <label>&nbsp;</label>}
+</div>
         <div className="inputs">
   <label>Image URL</label>
   <input

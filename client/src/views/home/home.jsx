@@ -11,50 +11,72 @@ import Cards from "../../components/cards/cards";
 const HomePage = () => {
   const dispatch = useDispatch();
   const PER_PAGE = 12; // Move the declaration here
-  const [page, setPage] = useState(0);
+  const [currentPage, setPage] = useState(0);
   const allPokemons = useSelector((state) => {
     const pokemons = state.allPokemons;
     if (Array.isArray(pokemons)) {
-      return pokemons.slice(page * PER_PAGE, page * PER_PAGE + PER_PAGE);
+      return pokemons.slice(currentPage * PER_PAGE, currentPage * PER_PAGE + PER_PAGE);
     }
     return [pokemons];
   });
 
-  const [searchString, setSearchString] = useState("");
+
 
   function handleChange(e) {
     setSearchString(e.target.value);
   }
 
-  async function handleSubmit(e) {
+  const [searchString, setSearchString] = useState("");
+  
+  
+  async function handleSubmit() {
+    console.log("searchString:", searchString);
     try {
-      
-      if (e) {
-        e.preventDefault();
-        const response = await dispatch(getByname(searchString));
-        if (response.payload.length === 0) {
+      // Use searchString in the dispatch action
+      const response = await dispatch(getByname(`${searchString.toLowerCase()}`));
+  
+      const searchStringLower = searchString.toLowerCase();
+  
+      if (response.payload) {
+        const matchFound = response.payload
+        matchFound.includes(searchStringLower)
+        
+  
+        if (matchFound) {
+          console.log(`Palabra clave '${searchString}' encontrada en '${response.payload}'`);
+          // Coloca aquí la lógica para despachar la acción
+        } else {
           console.log(`No se encontró ningún Pokémon con el nombre "${searchString}"`);
         }
-        // Reset the page only if it's a new search
-        if (page !== 0) {
-          setPage(0);
-        }
-        setSearchString("");
+      } else {
+        console.log(`No se encontró ningún Pokémon con el nombre "${searchString}"`);
+      }
+  
+      // Reset the page only if it's a new search
+      if (currentPage !== 0) {
+        setPage(0);
       }
     } catch (error) {
-      
       // Display an error message to the user
+      console.error('Error searching:', error);
     }
   }
   
   
   async function handlePage(pag) {
+   
     try {
-      const pageNumber = parseInt(pag, 10); // Parse pag as an integer
+      const pageNumber = parseInt(pag, 10);
       if (!isNaN(pageNumber)) {
-        dispatch(setPage(pageNumber));
-        setPage(pageNumber);
-        await dispatch(getPokemons(pageNumber, PER_PAGE));
+        // Check if the new page number is within the valid range
+        if (pageNumber >= 0 && pageNumber <= totalPages) {
+          // Fetch the next page of Pokemon data
+         
+          // Update the current page
+         setPage(pageNumber)  ;
+        } else {
+          console.error('Invalid page number:', pag);
+        }
       } else {
         console.error('Invalid page number:', pag);
       }
@@ -97,7 +119,7 @@ const HomePage = () => {
         <Cards allPokemons={allPokemons} setPage={setPage} />        
       </section>
       <footer>
-        <Pagination className="paginadohome" page={page} total={totalPages} handlePage={handlePage} />
+        <Pagination className="paginadohome" currentPage={currentPage} totalPages={totalPages} handlePage={handlePage} />
     <p className="description">&copy; 2023 Todos los derechos reservados</p>
   </footer>
       

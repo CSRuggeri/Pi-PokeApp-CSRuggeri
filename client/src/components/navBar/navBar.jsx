@@ -1,14 +1,25 @@
 
-
+import React, { useState } from 'react';
 import "./navBar.css";
 import { Link } from "react-router-dom";
 
 function Navbar({ handleChange, handleSubmit, setPage, handleClear }) {
-  const handleFormSubmit = (e) => {
+  const [searchString, setSearchString] = useState("");  
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
     console.log('Form submitted');
-    handleSubmit(e);
+  
+    try {
+      // Pass searchString to handleSubmit
+      await handleSubmit(searchString);
+  
+      // Reset the form
+      setSearchString("");
+    } catch (error) {
+      console.error('Error in form submission:', error);
+    }
   };
+  
 
   return (
     <div className="nav-bars">
